@@ -4,8 +4,7 @@ import numpy as np
 from kmodes.kmodes import KModes
 
 # reproduce results on small soybean data set
-x = np.genfromtxt('hdb5.csv', dtype=int, delimiter=',')[:, :-1]
-#y = np.genfromtxt('hdb7.csv', dtype=str, delimiter=',', usecols=(35, ))
+x = np.genfromtxt('hdb5.csv', dtype=int, delimiter=',')
 
 kmodes_huang = KModes(n_clusters=3, init='Huang', verbose=1)
 kmodes_huang.fit(x)
@@ -40,16 +39,3 @@ print(kmodes_cao.cluster_centroids_)
 # Print training statistics
 print(f'Final training cost: {kmodes_cao.cost_}')
 print(f'Training iterations: {kmodes_cao.n_iter_}')
-
-#print('Results tables:')
-#for result in (kmodes_huang, kmodes_cao):
-#    classtable = np.zeros((4, 4), dtype=int)
-#    for ii, _ in enumerate(y):
-#        classtable[int(y[ii][-1]) - 1, result.labels_[ii]] += 1
-#
-#    print("\n")
-#    print("    | Cl. 1 | Cl. 2 | Cl. 3 | Cl. 4 |")
-#    print("----|-------|-------|-------|-------|")
-#    for ii in range(n_clusters):
-#        prargs = tuple([ii + 1] + list(classtable[ii, :]))
-#        print(" D{0} |    {1:>2} |    {2:>2} |    {3:>2} |    {4:>2} |".format(*prargs))
